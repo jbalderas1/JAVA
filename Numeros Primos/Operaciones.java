@@ -41,10 +41,3 @@ static final String titulo = "Ola Numeros Primos";
 		}
 	}
 }	
-
-
-
-
-
-
-
