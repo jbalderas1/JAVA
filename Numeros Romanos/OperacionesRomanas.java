@@ -1,8 +1,11 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
         
 public class OperacionesRomanas{
 
-    public static String leerEntrada() {
+    public String leerEntrada() {
         String salida = "";
        try{
             // Definimos un flujo de caracteres de entrada: leerEntrada
@@ -129,7 +132,7 @@ public class OperacionesRomanas{
                 }if(remplazaNumero[3].equals("9")){
                     unidad = "IX";                
                 } 
-            System.out.println(miles+centenas+decenas+unidad+"\n");   
+            System.out.println("Numero Romano: "+miles+centenas+decenas+unidad+"\n");   
             }              
               
         }else{
@@ -142,27 +145,65 @@ public class OperacionesRomanas{
         System.out.print("Escribe el numero Romano (I,V,X...):");
         
         String numeroRomano;
-        String caracterRomano= "I V X L C D M";
+        List<String> simboloRomano = Arrays.asList("I","V","X","L","C","D","M");
         OperacionesRomanas leerEntrada = new OperacionesRomanas();
         numeroRomano = leerEntrada.leerEntrada(); 
-        
-        String vectorDefinido[]=caracterRomano.split(" ");
-        String vectorEntrada[]=numeroRomano.split("");
-        
-            for(int i= 0; i< vectorDefinido.length; i++){
-                System.out.println("LetraDefinida: " + i + vectorDefinido[i]);       
+        String numeroEntrada[]=numeroRomano.split("");
+            
+            ArrayList<Boolean> romano = new ArrayList<Boolean>();
+            int contador= 0;
+            for(int e= 1; e< numeroEntrada.length; e++){
+            
+                romano.add(simboloRomano.contains(numeroEntrada[e]));
+                System.out.println("Numero: "+e+":"+ numeroEntrada[e] + romano);           
+            
+                if (romano.contains(false)){
+                   contador++;
+               }
             }
-        
-            for(int i= 0; i< vectorEntrada.length; i++){
-                
-                if(vectorEntrada[i].equals(vectorDefinido[i])){
-                    System.out.println("LetraEntrada: " + i + vectorEntrada[i]);
-                }else {
-                    System.out.println("Que pex");
-                }
-                     
-            }
-             
-        }
 
+            int remplazaSimbolo;
+            int miles=0;
+            int centenas=0;
+            int decenas =0;
+            int unidades=0;
+            
+            if (contador==0){
+                
+                for(int e= 1; e< numeroEntrada.length; e++){
+                    if(numeroEntrada[e].equals("M")){
+                        miles++;
+                    }if(numeroEntrada[e].equals("C")){
+                        centenas++;
+                    }if(numeroEntrada[e].equals("X")){
+                        decenas++;
+                    }if(numeroEntrada[e].equals("I")){
+                        unidades++; 
+                    }if(numeroEntrada[e].equals("D")){
+                        centenas=5; 
+                    }if(numeroEntrada[e].equals("L")){
+                        decenas=5; 
+                    }if(numeroEntrada[e].equals("V")){
+                        unidades=5; 
+                    }if(numeroEntrada[e].equals("I")&&numeroEntrada[e].equals("V")){
+                        unidades=4; 
+                    }
+                    
+                }
+                
+                decenas = decenas*10;
+                centenas= centenas*100;
+                miles= miles*1000;
+                
+                remplazaSimbolo=miles+centenas+decenas+unidades;
+                
+                System.out.println("Numero Arabico: " +remplazaSimbolo);
+                System.out.println("\n");                
+                
+            }else{
+                System.out.println("No puede ser evaluado.\n");
+            }
+            
     }
+
+}
