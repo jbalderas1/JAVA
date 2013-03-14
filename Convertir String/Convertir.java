@@ -1,10 +1,11 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-	/**
+/**
 José Gerardo Balderas Monroy. 
+Clase que contiene el método Main, asi como un método que lee un dato de entrada de teclado
+* El método de Convertir trata la cadena de entrada para sustituir el caracter "o" por "x". 
 **/
 
 public class Convertir implements Solucion{
@@ -17,7 +18,7 @@ public class Convertir implements Solucion{
         String cadena;
         Convertir cadenaConvertir = new Convertir();
         cadena = cadenaConvertir.convertir("Argumento");
-        System.out.println("Me regresa: " + cadena);
+        System.out.println("Cadena convertida: " + cadena);
        
     }
 	
@@ -38,32 +39,30 @@ public class Convertir implements Solucion{
         Convertir leerString = new Convertir();
         entrada = leerString.leerEntrada();	
           
-        String longitud= Integer.toString(entrada.length());
         String palabra[]=entrada.split("");
         StringBuffer cadenafinal = new StringBuffer();
-        String antes,despues;
-        String cadena="";
-        char c= (char)120;
-        int contador=1;
+        String cadena;
+        int contador=0;
        
-        for(int e =0; e<= entrada.length();e++){
+        for(int e =1; e<= entrada.length();e++){
            
             if(palabra[e].indexOf("o")!=-1){
+                
                 contador++;
-                palabra[e] = "x";
+            
+                for(int i = 0; i<=contador;i++){
+                    String remplazo = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                            + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+                    palabra[e] = remplazo.substring(0,i);
+                }            
             } 
             
             cadenafinal = cadenafinal.append(palabra[e]);
             cadena = palabra[e];
-            System.out.println(cadena + contador);
-            
+            //System.out.println(cadena + contador);
+ 
         }
-            System.out.println(cadenafinal);
-            antes = entrada.substring(0,entrada.indexOf("o"));
-            despues = entrada.substring(entrada.indexOf("o")+1,entrada.length());
             
-            cadena =  longitud +  ":" + antes + "x" + despues;
-            
-	return cadena;
+	return cadenafinal.toString();
     }
 }
